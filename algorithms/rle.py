@@ -3,7 +3,7 @@ https://www.section.io/engineering-education/run-length-encoding-algorithm-in-py
 '''
 
 
-def encode_message(message):
+def compress(message):
     encoded_string = ""
     i = 0
     while (i <= len(message)-1):
@@ -23,7 +23,7 @@ def encode_message(message):
     return encoded_string
 
 
-def decode(our_message):
+def decompress(our_message):
     decoded_message = ""
     i = 0
     j = 0
@@ -39,22 +39,3 @@ def decode(our_message):
         i = i + 2
     return decoded_message
 
-
-def display():
-    # the original string
-    our_message = "AuuBBBCCCCCCcccccCCCCCCCCCA"
-    # pass in the original string
-    encoded_message = encode_message(our_message)
-    # pass in the decoded string
-    decoded_message = decode_message(encoded_message)
-    print("Original string: [" + our_message + "]")
-    print("Encoded string: [" + encoded_message + "]")
-    print("Decoded string: [" + decoded_message + "]")
-
-
-'''
-Sample case:
-Original string: [AuuBBBCCCCCCcccccCCCCCCCCCA]
-Encoded string: [1A2u3B6C5c9C1A]
-Decoded string: [AuuBBBCCCCCCcccccCCCCCCCCCA]
-'''

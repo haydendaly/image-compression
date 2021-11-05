@@ -1,9 +1,10 @@
 from pandas import DataFrame
-from algorithms import zlib
+from algorithms import rle, zlib
 from helper.benchmark import benchmark
 from helper.constants import cols
 
 algos = [
+    # rle, 
     zlib
 ]
 
