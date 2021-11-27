@@ -12,10 +12,16 @@ $ source venv/bin/activate
 $ pip3 install -r requirements.txt
 ```
 
-Run benchmarks:
+Run benchmarks (will be in `results/benchmarks.csv`):
 
 ```sh
 $ python3 main.py
+```
+
+Generate charts (will be in `results/graphs/*.png`):
+
+```sh
+$ python3 analysis.py
 ```
 
 ## Benchmark Format
