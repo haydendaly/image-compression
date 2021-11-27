@@ -30,6 +30,6 @@ $ python3 analysis.py
 | --------- | ------------- | --------- |
 | `compress_time` | Time for compression | Nanoseconds |
 | `decompress_time` | Time for decompression | Nanoseconds |
-| `compression_ratio` | Byte size of compressed over normal | N/A |
+| `compression_ratio` | Byte size of compressed over normal | raw_bytes / compressed_bytes |
 | `source_entropy` | TODO | TODO |
 | `bits_per_pixel` | TODO | TODO |
