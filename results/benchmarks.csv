@@ -1,2 +1,2 @@
-,algorithm,compress_time,decompress_time,compression_ratio
-0,zlib,42943,4257,0.7948717948717948
+,algorithm,compress_time,decompress_time,compression_ratio,source_entropy,bits_per_pixel
+0,zlib,10833,2500,0.7948717948717948,10,10
