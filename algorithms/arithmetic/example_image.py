@@ -1,4 +1,4 @@
-import scipy.misc
+import cv2
 import pyae
 import numpy
 import matplotlib.pyplot
@@ -12,7 +12,8 @@ from decimal import getcontext
 getcontext().prec = 444
 
 # Read an image.
-im = scipy.misc.face(gray=True)
+im = cv2.imread("/Users/neha/algo/image-compression/images/rgb8bit/artificial.ppm")
+im = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)
 
 # Just work on a small part to save time. The larger the image, the more time consumed.
 im = im[:15, :15]
