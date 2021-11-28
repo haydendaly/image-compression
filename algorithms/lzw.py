@@ -73,7 +73,7 @@ def compress(plaintext_bytes):
     L{decompress}. This is the best place to start using this module.
     """
     encoder = ByteEncoder()
-    return encoder.encodetobytes(plaintext_bytes)
+    return [b for b in encoder.encodetobytes(plaintext_bytes)]
 
 
 def decompress(compressed_bytes):
@@ -82,7 +82,7 @@ def decompress(compressed_bytes):
     L{compress}, returns an iterator over the uncompressed bytes.
     """
     decoder = ByteDecoder()
-    return decoder.decodefrombytes(compressed_bytes)
+    return b"".join(decoder.decodefrombytes(compressed_bytes))
 
 
 class ByteEncoder(object):
