@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from algorithms import bz2, rle, zlib, lzw, huffman
+from algorithms import burrows_wheeler, rle, zlib, lzw, huffman
 from helper.benchmark import benchmark
 from helper.constants import cols
 
@@ -8,7 +8,7 @@ algos = [
     zlib,
     lzw,
     huffman,
-    bz2,
+    burrows_wheeler,
 ]
 
 
