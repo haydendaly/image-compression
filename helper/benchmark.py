@@ -23,7 +23,8 @@ def benchmark(algo, results):
     decompress_end = perf_counter_ns()
 
     # compression ratio
-    compression_ratio = len(raw_bytes) / len(compressed_bytes)
+    compressed_size = len(compressed_bytes)
+    compression_ratio = len(raw_bytes) / (compressed_size if compressed_size else 1)
 
     # source entropy
     # TODO
