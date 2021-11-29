@@ -1,11 +1,12 @@
 from pandas import DataFrame
 from algorithms import rle, zlib
+from algorithms.arithmetic import arithmetic
 from helper.benchmark import benchmark
 from helper.constants import cols
 
 algos = [
     # rle, 
-    zlib
+    zlib, arithmetic
 ]
 
 
