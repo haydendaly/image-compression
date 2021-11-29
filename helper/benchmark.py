@@ -1,10 +1,15 @@
 from pandas import Series
 from time import perf_counter_ns
 from helper.constants import cols
+from PIL import Image
+import io
 
 
-def benchmark(algo, results):
-    raw_bytes = bytes("0" * 10000, "utf-8")
+def benchmark(algo, results): 
+    image = Image.open("images/rgb8bit/artificial.ppm")
+    imgByteArr = io.BytesIO()
+    image.save(imgByteArr, format=image.format)
+    raw_bytes = imgByteArr.getvalue()
 
     # time compression
     compress_start = perf_counter_ns()
