@@ -4,7 +4,7 @@ from helper.benchmark import benchmark
 from helper.constants import cols
 
 algos = [
-    # rle,
+    rle,
     zlib,
     lzw,
     huffman
