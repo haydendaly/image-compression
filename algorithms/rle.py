@@ -1,18 +1,19 @@
-'''
+"""
 https://www.section.io/engineering-education/run-length-encoding-algorithm-in-python/#implementation
-'''
+"""
 
 
-def compress(message):
+def compress(message: str) -> str:
+    # TODO: Change algorithm so that input is of type bytes and it returns bytes
     encoded_string = ""
     i = 0
-    while (i <= len(message)-1):
+    while i <= len(message) - 1:
         count = 1
         ch = message[i]
         j = i
-        while (j < len(message)-1):
+        while j < len(message) - 1:
             # if the character at the current index is the same as the character at the next index. If the characters are the same, the count is incremented to 1
-            if (message[j] == message[j + 1]):
+            if message[j] == message[j + 1]:
                 count = count + 1
                 j = j + 1
             else:
@@ -23,19 +24,19 @@ def compress(message):
     return encoded_string
 
 
-def decompress(our_message):
+def decompress(our_message: str) -> str:
+    # TODO: Change algorithm so that input is of type bytes and it returns bytes
     decoded_message = ""
     i = 0
     j = 0
     # splitting the encoded message into respective counts
-    while (i <= len(our_message) - 1):
+    while i <= len(our_message) - 1:
         run_count = int(our_message[i])
         run_word = our_message[i + 1]
         # displaying the character multiple times specified by the count
         for j in range(run_count):
             # concatenated with the decoded message
-            decoded_message = decoded_message+run_word
+            decoded_message = decoded_message + run_word
             j = j + 1
         i = i + 2
     return decoded_message
-
