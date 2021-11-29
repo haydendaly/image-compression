@@ -1,12 +1,14 @@
 from pandas import DataFrame
-from algorithms import rle, zlib, lzw
+from algorithms import burrows_wheeler, rle, zlib, lzw, huffman
 from helper.benchmark import benchmark
 from helper.constants import cols
 
 algos = [
-    # rle,
+    rle,
     zlib,
     lzw,
+    huffman,
+    burrows_wheeler,
 ]
 
 

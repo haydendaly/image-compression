@@ -14,15 +14,22 @@ def benchmark(algo, results):
     # time compression
     compress_start = perf_counter_ns()
     compressed_bytes = algo.compress(raw_bytes)
+    if algo.__name__ == "algorithms.huffman":
+        compressed_bytes, encoding_tree = compressed_bytes[0], compressed_bytes[1]
     compress_end = perf_counter_ns()
 
     # time decompression
     decompress_start = perf_counter_ns()
-    decompressed_bytes = algo.decompress(compressed_bytes)
+    if algo.__name__ == "algorithms.huffman":
+        decompressed_bytes = algo.decompress(compressed_bytes, encoding_tree)
+    else:
+        decompressed_bytes = algo.decompress(compressed_bytes)
+
     decompress_end = perf_counter_ns()
 
     # compression ratio
-    compression_ratio = len(raw_bytes) / len(compressed_bytes)
+    compressed_size = len(compressed_bytes)
+    compression_ratio = len(raw_bytes) / (compressed_size if compressed_size else 1)
 
     # source entropy
     # TODO
