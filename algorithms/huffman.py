@@ -84,7 +84,7 @@ def Total_Gain(data, coding):
     print("Space usage after compression (in bits):",  after_compression)
 
 
-def Huffman_Encoding(data):
+def compress(data):
     symbol_with_probs = Calculate_Probability(data)
     symbols = symbol_with_probs.keys()
     probabilities = symbol_with_probs.values()
@@ -125,7 +125,7 @@ def Huffman_Encoding(data):
     return encoded_output, nodes[0]
 
 
-def Huffman_Decoding(encoded_data, huffman_tree):
+def decompress(encoded_data, huffman_tree):
     tree_head = huffman_tree
     decoded_output = []
     for x in encoded_data:
@@ -145,11 +145,11 @@ def Huffman_Decoding(encoded_data, huffman_tree):
 
 
 """ First Test """
-data = "AAAAAAABCCCCCCDDEEEEE"
-print(data)
-encoding, tree = Huffman_Encoding(data)
-print("Encoded output", encoding)
-print("Decoded Output", Huffman_Decoding(encoding, tree))
+# data = "AAAAAAABCCCCCCDDEEEEE"
+# print(data)
+# encoding, tree = Huffman_Encoding(data)
+# print("Encoded output", encoding)
+# print("Decoded Output", Huffman_Decoding(encoding, tree))
 
 
 """ Second Test """
