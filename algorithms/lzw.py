@@ -642,7 +642,9 @@ class PagingDecoder(object):
 
         """
 
-        # TODO: WE NEED A CODE SIZE POLICY OBJECT THAT ISN'T THIS.
+        # TODO(lzw_original_comment): WE NEED A CODE SIZE POLICY OBJECT 
+        # THAT ISN'T THIS.
+
         # honestly, we should have a "codebook" object we need to pass
         # to bit packing/unpacking tools, etc, such that we don't have
         # to roll all of these code size assumptions everyplace.
