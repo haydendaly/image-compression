@@ -14,9 +14,8 @@ def find_benchmark_images():
     return [*map(str, joined_paths)]
 
 
-def benchmark(algo, results: DataFrame):
-    # TODO: Benchmark more than one image
-    image = Image.open("images/rgb8bit/artificial.ppm")
+def benchmark(algo, image_path: str, results: DataFrame):
+    image = Image.open(image_path)
     img_byte_array = io.BytesIO()
     image.save(img_byte_array, format=image.format)
     raw_bytes = img_byte_array.getvalue()
@@ -47,6 +46,7 @@ def benchmark(algo, results: DataFrame):
     result = Series(
         [
             algo.__name__.split(".")[1],
+            image_path,
             compress_end - compress_start,
             decompress_end - decompress_start,
             compression_ratio,
