@@ -49,7 +49,7 @@ def benchmark(algo, image_path: str, results: DataFrame):
     decompress_end = perf_counter_ns()
 
     # compression ratio
-    compressed_size = 0
+    compressed_size = sys.getsizeof(compressed_bytes)
     for byte in compressed_bytes:
         compressed_size += sys.getsizeof(byte)
     if algo.__name__ == "algorithms.huffman":
@@ -57,13 +57,11 @@ def benchmark(algo, image_path: str, results: DataFrame):
         compressed_size += tree_size
         print(tree_size)
 
-    raw_size = 0
+    raw_size = sys.getsizeof(raw_bytes)
     for byte in raw_bytes:
         raw_size += sys.getsizeof(byte)
 
     compression_ratio = raw_size / (compressed_size if compressed_size else 1)
-
-    print(compressed_size, raw_size, compression_ratio)
 
     # record results
     result = Series(
