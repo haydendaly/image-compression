@@ -27,9 +27,6 @@ def huffman_dfs_size(node):
 
 
 def benchmark(algo, image_path: str, results: DataFrame):
-    if algo.__name__ != "algorithms.huffman":
-        return Series()
-
     image = Image.open(image_path)
     img_byte_array = io.BytesIO()
     image.save(img_byte_array, format=image.format)
