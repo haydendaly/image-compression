@@ -1,7 +1,7 @@
-'''
+"""
 1. https://towardsdatascience.com/huffman-encoding-python-implementation-8448c3654328
 2. https://github.com/YCAyca/Data-Structures-and-Algorithms-with-Python/blob/main/Huffman_Encoding/huffman.py
-'''
+"""
 # A Huffman Tree Node
 
 
@@ -20,23 +20,23 @@ class Node:
         self.right = right
 
         # tree direction (0/1)
-        self.code = ''
+        self.code = ""
 
 
 """ A helper function to print the codes of symbols by traveling Huffman Tree"""
 codes = dict()
 
 
-def Calculate_Codes(node, val=''):
+def Calculate_Codes(node, val=""):
     # huffman code for current node
     newVal = val + str(node.code)
 
-    if(node.left):
+    if node.left:
         Calculate_Codes(node.left, newVal)
-    if(node.right):
+    if node.right:
         Calculate_Codes(node.right, newVal)
 
-    if(not node.left and not node.right):
+    if not node.left and not node.right:
         codes[node.symbol] = newVal
 
     return codes
@@ -61,10 +61,10 @@ def Calculate_Probability(data):
 def Output_Encoded(data, coding):
     encoding_output = []
     for c in data:
-      #  print(coding[c], end = '')
+        #  print(coding[c], end = '')
         encoding_output.append(coding[c])
 
-    string = ''.join([str(item) for item in encoding_output])
+    string = "".join([str(item) for item in encoding_output])
     return string
 
 
@@ -81,7 +81,7 @@ def Total_Gain(data, coding):
         # calculate how many bit is required for that symbol in total
         after_compression += count * len(coding[symbol])
     print("Space usage before compression (in bits):", before_compression)
-    print("Space usage after compression (in bits):",  after_compression)
+    print("Space usage after compression (in bits):", after_compression)
 
 
 def Huffman_Encoding(data):
@@ -111,8 +111,7 @@ def Huffman_Encoding(data):
         right.code = 1
 
         # combine the 2 smallest nodes to create new node
-        newNode = Node(left.prob+right.prob, left.symbol +
-                       right.symbol, left, right)
+        newNode = Node(left.prob + right.prob, left.symbol + right.symbol, left, right)
 
         nodes.remove(left)
         nodes.remove(right)
@@ -129,9 +128,9 @@ def Huffman_Decoding(encoded_data, huffman_tree):
     tree_head = huffman_tree
     decoded_output = []
     for x in encoded_data:
-        if x == '1':
+        if x == "1":
             huffman_tree = huffman_tree.right
-        elif x == '0':
+        elif x == "0":
             huffman_tree = huffman_tree.left
         try:
             if huffman_tree.left.symbol == None and huffman_tree.right.symbol == None:
@@ -140,7 +139,7 @@ def Huffman_Decoding(encoded_data, huffman_tree):
             decoded_output.append(huffman_tree.symbol)
             huffman_tree = tree_head
 
-    string = ''.join([str(item) for item in decoded_output])
+    string = "".join([str(item) for item in decoded_output])
     return string
 
 

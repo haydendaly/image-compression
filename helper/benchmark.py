@@ -4,6 +4,7 @@ from time import perf_counter_ns
 from helper.constants import cols
 from PIL import Image
 import io
+import sys
 
 
 def find_benchmark_images():
@@ -14,7 +15,21 @@ def find_benchmark_images():
     return [*map(str, joined_paths)]
 
 
+def huffman_dfs_size(node):
+    size = node.__sizeof__()
+    size += sys.getsizeof(node.code)
+    size += sys.getsizeof(node.symbol)
+    if node.left:
+        size += huffman_dfs_size(node.left)
+    if node.right:
+        size += huffman_dfs_size(node.right)
+    return size
+
+
 def benchmark(algo, image_path: str, results: DataFrame):
+    if algo.__name__ != "algorithms.huffman":
+        return Series()
+
     image = Image.open(image_path)
     img_byte_array = io.BytesIO()
     image.save(img_byte_array, format=image.format)
@@ -37,10 +52,21 @@ def benchmark(algo, image_path: str, results: DataFrame):
     decompress_end = perf_counter_ns()
 
     # compression ratio
-    # TODO: Fix compression ratio to use bytes instead of len of the byte data
-    # structure
-    compressed_size = len(compressed_bytes)
-    compression_ratio = len(raw_bytes) / (compressed_size if compressed_size else 1)
+    compressed_size = 0
+    for byte in compressed_bytes:
+        compressed_size += sys.getsizeof(byte)
+    if algo.__name__ == "algorithms.huffman":
+        tree_size = huffman_dfs_size(encoding_tree)
+        compressed_size += tree_size
+        print(tree_size)
+
+    raw_size = 0
+    for byte in raw_bytes:
+        raw_size += sys.getsizeof(byte)
+
+    compression_ratio = raw_size / (compressed_size if compressed_size else 1)
+
+    print(compressed_size, raw_size, compression_ratio)
 
     # record results
     result = Series(

@@ -642,7 +642,7 @@ class PagingDecoder(object):
 
         """
 
-        # TODO(lzw_original_comment): WE NEED A CODE SIZE POLICY OBJECT 
+        # TODO(lzw_original_comment): WE NEED A CODE SIZE POLICY OBJECT
         # THAT ISN'T THIS.
 
         # honestly, we should have a "codebook" object we need to pass

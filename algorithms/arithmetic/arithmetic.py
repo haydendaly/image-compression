@@ -25,17 +25,18 @@ length = pixels.shape[0]
 freq = Counter(pixels)
 probs = {}
 for key in freq.keys():
-    probs[key] = freq[key]/length
+    probs[key] = freq[key] / length
 
 start = 0
 probs_limits = {}
 for key in probs.keys():
-    probs_limits[key] = start, start+probs[key]
+    probs_limits[key] = start, start + probs[key]
     start += probs[key]
 
 np.save("probabilities.npy", probs_limits)
 print("Processing input and calculating probabilities: Done!")
 compress.encode_image(pixels, block_size, probs_limits, float_type)
 # additonal pixels is zeros to make the array divisible by block_size so I need to handle it in decoding also
-decompress.decode_image("encoded_array", n, m, block_size,
-                    probs_limits, additional_pixels)
+decompress.decode_image(
+    "encoded_array", n, m, block_size, probs_limits, additional_pixels
+)

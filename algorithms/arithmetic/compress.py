@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def encode_image(pixels, block_size, probs_limits, float_type='float64'):
+def encode_image(pixels, block_size, probs_limits, float_type="float64"):
     i = 0
     block = []
     blocks = []
@@ -23,11 +23,11 @@ def encode_image(pixels, block_size, probs_limits, float_type='float64'):
         start = t_start = probs_limits[blocks[i][0]][0]
         end = t_end = probs_limits[blocks[i][0]][1]
         for pixel in blocks[i]:
-            t_start = start + (end-start)*probs_limits[pixel][0]
-            t_end = start + (end-start)*probs_limits[pixel][1]
+            t_start = start + (end - start) * probs_limits[pixel][0]
+            t_end = start + (end - start) * probs_limits[pixel][1]
             start = t_start
             end = t_end
-        avg = (start+end)/2
+        avg = (start + end) / 2
         bins = ""
         for j in range(32):
             avg *= 2

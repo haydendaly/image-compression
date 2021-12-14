@@ -4,9 +4,9 @@ from helper.constants import units
 from main import algos
 
 # clean data
-results = pd.read_csv('./results/benchmarks.csv')
-results = results.set_index(keys=['algorithm'])
-results = results.drop(columns=['Unnamed: 0'])
+results = pd.read_csv("./results/benchmarks.csv")
+results = results.set_index(keys=["algorithm"])
+results = results.drop(columns=["Unnamed: 0"])
 results = results.transpose()
 
 for metric, values in results.iterrows():
