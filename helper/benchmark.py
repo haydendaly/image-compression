@@ -15,7 +15,6 @@ def find_benchmark_images():
 
 
 def benchmark(algo, image_path: str, results: DataFrame):
-    # TODO: Benchmark more than one image
     image = Image.open(image_path)
     img_byte_array = io.BytesIO()
     image.save(img_byte_array, format=image.format)
