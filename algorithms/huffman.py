@@ -80,16 +80,16 @@ def Total_Gain(data, coding):
         count = data.count(symbol)
         # calculate how many bit is required for that symbol in total
         after_compression += count * len(coding[symbol])
-    print("Space usage before compression (in bits):", before_compression)
-    print("Space usage after compression (in bits):",  after_compression)
+    # print("Space usage before compression (in bits):", before_compression)
+    # print("Space usage after compression (in bits):",  after_compression)
 
 
 def compress(data):
     symbol_with_probs = Calculate_Probability(data)
     symbols = symbol_with_probs.keys()
     probabilities = symbol_with_probs.values()
-    print("symbols: ", symbols)
-    print("probabilities: ", probabilities)
+    # print("symbols: ", symbols)
+    # print("probabilities: ", probabilities)
 
     nodes = []
 
@@ -119,7 +119,7 @@ def compress(data):
         nodes.append(newNode)
 
     huffman_encoding = Calculate_Codes(nodes[0])
-    print("symbols with codes", huffman_encoding)
+    # print("symbols with codes", huffman_encoding)
     Total_Gain(data, huffman_encoding)
     encoded_output = Output_Encoded(data, huffman_encoding)
     return encoded_output, nodes[0]
