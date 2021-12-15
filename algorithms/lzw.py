@@ -65,6 +65,29 @@ DEFAULT_MIN_BITS = 9
 DEFAULT_MAX_BITS = 12
 
 
+def make_compressor(bit_max_width):
+    encoder = ByteEncoder(bit_max_width)
+
+    def compress(plaintext_bytes):
+        return [b for b in encoder.encodetobytes(plaintext_bytes)]
+
+    return compress
+
+
+def make_benchmarkable_algorithm(bit_max_width=DEFAULT_MAX_BITS):
+    """
+    Return an object with both compress and decompress methods. Accepts
+    parametrizing the bit max width for the codepoints.
+    """
+    _compress = make_compressor(bit_max_width)
+
+    class ModuleWrapper(object):
+        def __init__(self, attr_dict):
+            self.__dict__ = attr_dict
+
+    return ModuleWrapper({"compress": _compress, "decompress": decompress})
+
+
 def compress(plaintext_bytes):
     """
     Given an iterable of bytes, returns a (hopefully shorter) iterable
