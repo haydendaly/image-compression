@@ -152,7 +152,7 @@ for i, metric in enumerate(["compress_time", "decompress_time", "compression_rat
     plt.bar(algos, values)
     plt.ylabel(units[metric])
     plt.title("rgb " + metric + " averages")
-    plt.savefig(f"./results/graphs/average_rgb_{metric}.png")
+    plt.savefig(f"./results/graphs/average_gray_{metric}.png")
     plt.clf()
 
 # normalized rgb averages
@@ -174,5 +174,5 @@ for i, metric in enumerate(["compress_time", "decompress_time", "compression_rat
     plt.bar(algos, values / min(values))
     plt.ylabel(f"{units[metric]} / min({units[metric]})")
     plt.title("relative rgb " + metric + " averages")
-    plt.savefig(f"./results/graphs/relative_average_rgb_{metric}.png")
+    plt.savefig(f"./results/graphs/relative_average_gray_{metric}.png")
     plt.clf()
