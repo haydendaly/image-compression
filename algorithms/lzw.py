@@ -57,6 +57,7 @@ True
 import struct
 import itertools
 import six
+from algorithms.utils import AlgorithmModule
 
 CLEAR_CODE = 256
 END_OF_INFO_CODE = 257
@@ -80,12 +81,8 @@ def make_benchmarkable_algorithm(bit_max_width=DEFAULT_MAX_BITS):
     parametrizing the bit max width for the codepoints.
     """
     _compress = make_compressor(bit_max_width)
-
-    class ModuleWrapper(object):
-        def __init__(self, attr_dict):
-            self.__dict__ = attr_dict
-
-    return ModuleWrapper({"compress": _compress, "decompress": decompress})
+    name = f"algorithms.lzw_{bit_max_width}_bits"
+    return AlgorithmModule({"compress": _compress, "decompress": decompress}, name=name)
 
 
 def compress(plaintext_bytes):

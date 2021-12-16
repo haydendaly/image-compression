@@ -1,4 +1,5 @@
 import zlib as z
+from algorithms.utils import AlgorithmModule
 
 
 def compress(data):
@@ -8,3 +9,8 @@ def compress(data):
 
 def decompress(compressed_data):
     return z.decompress(compressed_data)
+
+
+def make_benchmarkable_algorithm():
+    name = "algorithms.zlib_huffman"
+    return AlgorithmModule({"compress": compress, "decompress": decompress}, name=name)
