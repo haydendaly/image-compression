@@ -36,7 +36,7 @@ def customized_box_plot(percentiles, axes, redraw=True, *args, **kwargs):
         max_y = max(q4_end, max_y)
         axes.set_ylim([0, max_y])
     x_ticks_labels = [experiment[5] for experiment in percentiles]
-    ax.set_xticklabels(x_ticks_labels, fontsize=8)
+    ax.set_xticklabels(x_ticks_labels, fontsize=7)
     if redraw:
         ax.figure.canvas.draw()
     return box_plot
@@ -106,11 +106,11 @@ charts_gray = [[], [], []]
 for i in range(3):
     for algo, percentiles in rgb_data.items():
         charts_rgb[i].append(percentiles[i][:6])
-        # average_rgb[i].append([algo, percentiles[5]])
+        average_rgb[i].append([algo, percentiles[i][6]])
 for i in range(3):
     for algo, percentiles in grayscale_data.items():
         charts_gray[i].append(percentiles[i][:6])
-        # average_gray[i].append([algo, percentiles[5]])
+        average_gray[i].append([algo, percentiles[i][6]])
 
 # rgb
 for i, metric in enumerate(["compress_time", "decompress_time", "compression_ratio"]):
@@ -132,9 +132,47 @@ for i, metric in enumerate(["compress_time", "decompress_time", "compression_rat
     plt.ylabel(units[metric])
     fig.savefig(f"results/graphs/gray_{metric}.png")
 
-# for metric, values in results.iterrows():
-#     plt.bar([algo.__name__[11:] for algo in algos], values.tolist())
-#     plt.ylabel(units[metric])
-#     plt.title(metric)
-#     plt.savefig(f"./results/graphs/{metric}.png")
-#     plt.clf()
+plt.clf()
+# rgb averages
+for i, metric in enumerate(["compress_time", "decompress_time", "compression_ratio"]):
+    algos = [algo[0] for algo in average_rgb[i]]
+    values = [algo[1] for algo in average_rgb[i]]
+    plt.rc("xtick", labelsize=7)
+    plt.bar(algos, values)
+    plt.ylabel(units[metric])
+    plt.title("rgb " + metric + " averages")
+    plt.savefig(f"./results/graphs/average_rgb_{metric}.png")
+    plt.clf()
+
+# gray averges
+for i, metric in enumerate(["compress_time", "decompress_time", "compression_ratio"]):
+    algos = [algo[0] for algo in average_gray[i]]
+    values = [algo[1] for algo in average_gray[i]]
+    plt.rc("xtick", labelsize=7)
+    plt.bar(algos, values)
+    plt.ylabel(units[metric])
+    plt.title("rgb " + metric + " averages")
+    plt.savefig(f"./results/graphs/average_rgb_{metric}.png")
+    plt.clf()
+
+# normalized rgb averages
+for i, metric in enumerate(["compress_time", "decompress_time", "compression_ratio"]):
+    algos = [algo[0] for algo in average_rgb[i]]
+    values = [algo[1] for algo in average_rgb[i]]
+    plt.rc("xtick", labelsize=7)
+    plt.bar(algos, np.array(values) / min(values))
+    plt.ylabel(f"{units[metric]} / min({units[metric]})")
+    plt.title("relative rgb " + metric + " averages")
+    plt.savefig(f"./results/graphs/relative_average_rgb_{metric}.png")
+    plt.clf()
+
+# normalized gray averges
+for i, metric in enumerate(["compress_time", "decompress_time", "compression_ratio"]):
+    algos = [algo[0] for algo in average_gray[i]]
+    values = np.array([algo[1] for algo in average_gray[i]])
+    plt.rc("xtick", labelsize=7)
+    plt.bar(algos, values / min(values))
+    plt.ylabel(f"{units[metric]} / min({units[metric]})")
+    plt.title("relative rgb " + metric + " averages")
+    plt.savefig(f"./results/graphs/relative_average_rgb_{metric}.png")
+    plt.clf()
