@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 from collections import defaultdict
 from helper.constants import units
-from main import algos
 
 fig, ax = plt.subplots()
 
@@ -35,9 +34,9 @@ def customized_box_plot(percentiles, axes, redraw=True, *args, **kwargs):
         box_plot["medians"][box_no].set_ydata([q3_start, q3_start])
         min_y = min(q1_start, min_y)
         max_y = max(q4_end, max_y)
-        axes.set_ylim([min_y, max_y])
+        axes.set_ylim([0, max_y])
     x_ticks_labels = [experiment[5] for experiment in percentiles]
-    ax.set_xticklabels(x_ticks_labels, fontsize=12)
+    ax.set_xticklabels(x_ticks_labels, fontsize=8)
     if redraw:
         ax.figure.canvas.draw()
     return box_plot
