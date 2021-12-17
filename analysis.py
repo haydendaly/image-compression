@@ -173,6 +173,6 @@ for i, metric in enumerate(["compress_time", "decompress_time", "compression_rat
     plt.rc("xtick", labelsize=7)
     plt.bar(algos, values / min(values))
     plt.ylabel(f"{units[metric]} / min({units[metric]})")
-    plt.title("relative rgb " + metric + " averages")
+    plt.title("relative gray " + metric + " averages")
     plt.savefig(f"./results/graphs/relative_average_gray_{metric}.png")
     plt.clf()
