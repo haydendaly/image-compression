@@ -151,7 +151,7 @@ for i, metric in enumerate(["compress_time", "decompress_time", "compression_rat
     plt.rc("xtick", labelsize=7)
     plt.bar(algos, values)
     plt.ylabel(units[metric])
-    plt.title("rgb " + metric + " averages")
+    plt.title("gray " + metric + " averages")
     plt.savefig(f"./results/graphs/average_gray_{metric}.png")
     plt.clf()
 
